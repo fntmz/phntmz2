@@ -1,0 +1,125 @@
+/* header section */
+#index-header {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#header-menu {
+    position: absolute;
+    top: 2%;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+#index-header > div:nth-child(2) {
+    height: 25%;
+}
+
+#recent-news-wrapper {
+    border-right: 1px solid var(--color);
+}
+
+#index-header h2,
+#index-header h5 {
+    font-family: "Montserrat", sans-serif;
+    color: var(--color);
+}
+
+#index-header p {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    color: var(--color);
+}
+
+#recent-news > ul {
+    all: unset;
+    list-style: none;
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 14px;
+}
+
+#recent-news li {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted var(--color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#recent-news li:last-child {
+    border: 0;
+}
+
+#meta-controls {
+    position: relative;
+}
+
+#darkmode {
+    position: absolute;
+    bottom: 0;
+    font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+/* posts section */
+#posts-sort {
+    background: var(--banner-linear);
+    padding: 10px 0 10px 0;
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    border-top: 2px solid var(--color);
+    border-bottom: 2px solid var(--color);
+    font-size: 1.5rem;
+}
+
+.posts-timeline {
+    border-left: 3px solid var(--a-highlight);
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.posts-timeline::before {
+    content: "\200B";
+    position: relative;
+    background-color: var(--a-highlight);
+    left: -9px;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    align-self: center;
+}
+
+.posts-date {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.01rem;
+}
+
+#index-posts {
+    display: flex;
+    justify-content: center;
+}
+
+#posts-container {
+    width: 1000px;
+}
+
+#posts-container > * {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 400;
+    color: var(--color);
+}
+
+.posts-timeline > * {
+    display: flex;
+    align-items: center;
+}
+
+.posts-title {
+    font-family: "Zen Kaku Gothic New";
+}

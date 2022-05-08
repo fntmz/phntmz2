@@ -1,0 +1,43 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐩𝐨𝐬𝐭𝐬{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+
+<div id="user-wrapper">
+    <div id="user-legend">
+        <div>ID</div>
+        <div>Title</div>
+        <div>Description</div>
+        <div>Author</div>
+        <div>Uploaded</div>
+        <div>Action</div>
+    </div>
+    <div id="list-wrapper">
+        {% for posts in posts %}
+        <div class="user-row">
+            <div>{{ forloop.counter }}</div>
+            <div>{{ posts.title }}</div>
+            <div>{{ posts.description }}</div>
+            <div>{{ posts.author }}</div>
+            <div>{{ posts.created_at }}</div>
+
+            <div class="user-action">
+                <a href="{% url 'edit_posts' posts.id %}">Edit</a>
+                <a href="{% url 'delete_posts' posts.id %}">Delete</a>
+                <a href="{% url 'view_posts' posts.id %}">Read</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+<a href="{% url 'create_posts' %}">create</a>
+{% endblock %}

@@ -1,0 +1,84 @@
+#navbar-content,
+#navbar-btn,
+#navbar-back-wrapper {
+    display: none !important;
+}
+
+#sidebar > *:last-child {
+    text-align: center;
+}
+
+.border-marquee {
+    animation: marquee 4s infinite;
+    position: absolute;
+    height: 2px;
+    background-color: var(--color);
+    top: 0;
+}
+
+a {
+    transition: color 0.3s, right 0.3s ease-out !important;
+}
+
+form {
+    margin-top: 20px;
+}
+
+section:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle-btn {
+    cursor: pointer;
+    color: var(--color);
+    font-family: "Montserrat", sans-serif;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    float: right;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color);
+}
+
+#register-section {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+#login-section,
+#register-section {
+    font-family: "Raleway", sans-serif;
+}
+
+#login-section > *:last-child,
+#register-section > *:last-child {
+    transition: color 0.3s, right 0.3s ease-out !important;
+    color: var(--color);
+    float: right;
+    margin-right: 20px;
+}
+
+#login-section > *:last-child::before {
+    content: "Login";
+    margin-right: 32px;
+}
+
+#register-section > *:last-child::before {
+    content: "Register as user";
+    margin-right: 32px;
+}
+
+@media only screen and (max-width: 990px) {
+    .toggle-btn {
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 95%;
+    }
+}

@@ -1,0 +1,26 @@
+.easing-right {
+    position: relative;
+    right: 0;
+    transition: right ease-out 0.3s;
+}
+.easing-right:hover {
+    right: -5px;
+}
+
+.easing-left {
+    position: relative;
+    left: 0;
+    transition: left ease-out 0.3s;
+}
+.easing-left:hover {
+    left: -5px;
+}
+
+.easing-bottom {
+    position: relative;
+    bottom: 0;
+    transition: bottom ease-out 0.3s;
+}
+.easing-bottom:hover {
+    bottom: -5px;
+}

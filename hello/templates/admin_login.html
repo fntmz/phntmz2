@@ -1,0 +1,54 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐥𝐨𝐠𝐢𝐧{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/login.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin/form_user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<span class="border-marquee"></span>
+
+<div class="form-wrapper" id="login-section">
+    <form action="" method="POST" id="login_form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input type="text" id="usernameInput" name="username" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password" id="passwordInput" name="password" autocomplete="off" required />
+        </div>
+    </form>
+    <button class="easing-right" form="login_form" name="login_form">
+        &rarr;
+    </button>
+</div>
+<div class="form-wrapper" id="register-section">
+    <form action="" method="POST" id="register_form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" id="nameInput" name="name" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input type="text" id="usernameInput" name="username" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="text" id="passwordInput" name="password" autocomplete="off" required />
+        </div>
+    </form>
+    <button class="easing-right" form="register_form" name="register_form">
+        &rarr;
+    </button>
+</div>
+
+{% endblock %} {% block sidebar %}
+<a id="toggle-btn" href="javascript:void(0)" onclick="toggleSection()">register</a>
+{% endblock %} {% block js %}
+<script src="{% static 'js/admin/togglesection.js' %}"></script>
+{% endblock %}

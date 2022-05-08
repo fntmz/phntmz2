@@ -1,0 +1,58 @@
+#header-menu {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+#post-content {
+    margin-top: 15vh;
+}
+
+#content-wrapper > * {
+    margin-bottom: 25px;
+}
+
+#content-wrapper > div {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+#darkmode-wrapper {
+    position: sticky;
+    right: 0;
+}
+
+#darkmode-wrapper > a {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: absolute;
+}
+
+#comment-input {
+    padding: 0 20px 0 20px;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0;
+    border-bottom: 2px solid var(--color) !important;
+    outline: 0;
+    caret-color: var(--color);
+    font-size: 0.8rem !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    color: var(--color);
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+}
+
+h4 {
+    font-family: 'Montserrat', sans-serif;
+}

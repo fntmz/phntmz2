@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}𝐚𝐫𝐭𝐢𝐜𝐥𝐞 | {{ posts.title }}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/view_post.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="container" id="header-menu">
+    <a href="{% url 'index' %}">Home</a>
+    <a>Media</a>
+    <a>About</a>
+    <a>Copyright</a>
+</div>
+
+<div class="container" id="post-content">
+    <div class="row g-5">
+        <div class="col-xl-8 col-12" id="content-wrapper">
+            <h1>{{ posts.title }}</h1>
+            <h4>{{ posts.description }}</h4>
+            <div>{{ posts.detail }}</div>
+        </div>
+        <div class="col-xl-4 col-12" id="meta-wrapper">
+            <h1>Comments</h1>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% if not username %}
+                <input name="detail" id="comment-input" placeholder="commenting as anonymous..." type="submit"
+                    hidden></input>
+                {% else %}
+                <input name="detail" id="comment-input" placeholder="commenting as {{ username }}"></input>
+                {% endif %}
+                <input name="create_comment" type="submit" hidden></input>
+            </form>
+
+            {% for comment in comments %}
+            <div class="comment">
+                <div class="comment-author">
+                    {{ comment.author }}
+                </div>
+                <div class="comment-content">
+                    {{ comment.content }}
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block js %}
+    {% endblock %}

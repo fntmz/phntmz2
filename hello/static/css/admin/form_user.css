@@ -1,0 +1,76 @@
+section:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+textarea {
+    resize: none;
+}
+
+input,
+select,
+textarea {
+    padding: 0 20px 0 20px;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0;
+    border-bottom: 2px solid var(--color) !important;
+    outline: 0;
+    caret-color: var(--color);
+    font-size: 0.8rem !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+input,
+select,
+label,
+textarea {
+    color: var(--color);
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+label {
+    position: relative;
+    left: 20px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+}
+
+button {
+    text-align: left;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+.form-wrapper {
+    width: 50%;
+}
+
+#submit-btn {
+    transition: color 0.3s;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: var(--color);
+}
+#sidebar > *:nth-child(2):hover > #submit-btn {
+    color: var(--a-highlight);
+}
+
+button:hover {
+    color: var(--a-highlight) !important;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .form-wrapper {
+        width: 100%;
+    }
+}

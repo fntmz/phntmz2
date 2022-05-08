@@ -1,0 +1,15 @@
+body[data-theme="dark_theme"] {
+    --color: white;
+    --background-color: black;
+    --inverse-a-highlight: rgb(252, 87, 96);
+    --a-highlight: rgb(160, 160, 255);
+    --banner-linear: linear-gradient(300deg, #fc5760 10%, #7303c0, #000000 90%);
+}
+
+body[data-theme="light_theme"] {
+    --color: black;
+    --background-color: white;
+    --inverse-a-highlight: rgb(160, 160, 255);
+    --a-highlight: rgb(252, 87, 96);
+    --banner-linear: linear-gradient(300deg, #fc5760 10%, #c471ed, #ffffff 90%);
+}

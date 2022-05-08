@@ -1,0 +1,19 @@
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes marquee {
+    0% {
+        width: 0;
+        right: 100%;
+    }
+    50% {
+        width: 100%;
+    }
+    100% {
+        width: 0%;
+        right: 0;
+    }
+}

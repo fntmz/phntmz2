@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐜𝐫𝐞𝐚𝐭𝐞 𝐮𝐬𝐞𝐫{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/form_user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div class="form-wrapper">
+    <form action="" method="POST" id="form_user">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" id="nameInput" name="name" autocomplete="off" maxlength="128" required />
+        </div>
+        <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input type="text" id="usernameInput" name="username" autocomplete="off" maxlength="128" required />
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="text" id="passwordInput" name="password" autocomplete="off" maxlength="128" required />
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Role</label>
+            <select type="number" id="roleInput" name="role">
+                <option value="2">User</option>
+                <option value="1">Moderator</option>
+            </select>
+        </div>
+    </form>
+</div>
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+<button type="submit" form="form_user">
+    <span id="submit-btn">submit</span>
+</button>
+{% endblock %}

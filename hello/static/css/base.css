@@ -1,0 +1,23 @@
+body {
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+body,
+body * {
+    color: var(--color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color);
+    transition: color 300ms;
+}
+
+a:hover {
+    color: var(--a-highlight) !important;
+}
+
+#main-content {
+    height: 200vh;
+}

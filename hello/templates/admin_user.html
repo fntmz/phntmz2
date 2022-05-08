@@ -1,0 +1,56 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐮𝐬𝐞𝐫𝐬{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+
+<div id="user-wrapper">
+    <div id="user-legend">
+        <div>ID</div>
+        <div>Username</div>
+        <div>Name</div>
+        <div>Role</div>
+        <div>Action</div>
+    </div>
+    <div id="list-wrapper">
+        {% for user in user %}
+        <div class="user-row">
+            <div>{{ forloop.counter }}</div>
+            <div>{{ user.username }}</div>
+            <div>{{ user.name }}</div>
+
+            <div>
+                <!-- if user.role == 1 print this that... -->
+                {% if user.role == 0 %}
+                Admin
+                {% elif user.role == 1 %}
+                Moderator
+                {% else %}
+                User
+                {% endif %}
+                <!--  -->
+            </div>
+
+            <div class="user-action">
+                {% if role == '0' and user.username != username %}
+                <a href="{% url 'edit_user' user.id %}">Edit</a>
+                <a href="{% url 'delete_user' user.id %}">Delete</a>
+                {% elif role == '1' and user.role == 2 %}
+                <a href="{% url 'edit_user' user.id %}">Edit</a>
+                <a href="{% url 'delete_user' user.id %}">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+<a href="{% url 'create_user' %}">create</a>
+{% endblock %}

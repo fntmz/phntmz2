@@ -1,0 +1,151 @@
+body {
+    font-size: 16px;
+    background-color: var(--background-color);
+    overflow: hidden;
+    display: flex;
+    margin: 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+section,
+main {
+    transition: width 0.3s;
+}
+
+main {
+    position: relative;
+    width: calc(100% - 90px);
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    width: 90px;
+    height: 100vh;
+    border-left: 2px solid var(--color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color);
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--a-highlight) !important;
+}
+
+section:nth-child(1) {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+section:nth-child(2) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    width: 90px;
+    height: 100vh;
+    border-left: 2px solid var(--color);
+}
+
+section {
+    transition: width 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#navbar-btn {
+    position: relative;
+    top: -10px;
+    font-size: 4rem;
+}
+#navbar-content {
+    text-align: center;
+    visibility: hidden;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+}
+#navbar-content > * {
+    margin-bottom: 0.2rem;
+    opacity: 0;
+    position: relative;
+    top: 10px;
+    transition: opacity 0.3s, top 0.3s, right 0.3s;
+}
+
+#sidebar {
+    width: 90px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--color);
+}
+
+#sidebar > *:nth-child(2) {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    height: 100%;
+    transition: letter-spacing 0.3s, color 0.3s !important;
+}
+
+#sidebar > *:nth-child(2):hover {
+    letter-spacing: 5px;
+}
+
+#darkmode-btn {
+    font-size: 1rem;
+    position: absolute;
+    height: 10% !important;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar-back-wrapper {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom: 7%;
+    width: 100%;
+    height: 10%;
+}
+
+#navbar-back-text {
+    position: absolute;
+    top: 10%;
+    opacity: 0;
+    color: var(--color);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.animation-spin {
+    animation: spin 0.5s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+}

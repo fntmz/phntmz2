@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}𝐡𝐨𝐦𝐞{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container" id="index-header">
+    <div class="container" id="header-menu">
+        <a href="{% url 'index' %}">Home</a>
+        <a>Media</a>
+        <a>About</a>
+        <a>Copyright</a>
+    </div>
+    <div class="row gx-5">
+        <div class="col" id="recent-news-wrapper">
+            <h2>
+                Most Recent
+            </h2>
+            <div>
+                <h5>
+                    <a href="{% url 'view_posts' posts.0.id %}" id="recent-posts-title">
+                        {{ posts.0.title }}
+                    </a>
+                </h5>
+                <p>Published on {{ posts.0.created_at }} by {{ posts.0.author }}</p>
+            </div>
+        </div>
+        <div class="col" id="meta-controls">
+            <div id="login">
+                {% if username %}
+                <h2>Welcome back, {{ username }}</h2>
+                <h5><a href="{% url 'login' %}">Admin</a> | <a href="{% url 'logout' %}">Logout</a></h5>
+                {% else %}
+                <h2>Hello, reader</h2>
+                <h5><a href="{% url 'login' %}">Login | Register</a></h5>
+                {% endif %}
+            </div>
+            <div id="darkmode">
+                <a href="javascript:void(0)" onclick="setThemePreference()">
+                    Toggle darkmode
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="recent-news">
+            <h2>
+                Recent News
+            </h2>
+            <ul>
+                {% for post in posts|slice:":5" %}
+                <li><a href="{% url 'view_posts' post.id %}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="posts-sort">
+    <i>Published</i>
+</div>
+<div id="index-posts">
+    <div class="container">
+        {% for post in posts %}
+        <div class="row posts-timeline">
+            <div class="col-3 posts-date">
+                {{ post.created_at }}
+            </div>
+            <div class="col-8">
+                <a class="posts-title" href="{% url 'view_posts' post.id %}">
+                    {{ post.title }}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
