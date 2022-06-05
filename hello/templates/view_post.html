@@ -17,39 +17,52 @@
 
 <div class="container" id="post-content">
     <div class="row g-5">
-        <div class="col-xl-8 col-12" id="content-wrapper">
+        <a href="#comment-wrapper" id="jump-comment">go to comments</a>
+
+        <div class="col-xl-7 col-12" id="content-wrapper">
             <h1>{{ posts.title }}</h1>
             <h4>{{ posts.description }}</h4>
             <div>{{ posts.detail }}</div>
         </div>
-        <div class="col-xl-4 col-12" id="meta-wrapper">
-            <h1>Comments</h1>
 
+        <div class="col-xl-5 col-12" id="comment-wrapper">
+            <h1>Comments</h1>
             <form action="" method="POST">
                 {% csrf_token %}
-                {% if not username %}
-                <input name="detail" id="comment-input" placeholder="commenting as anonymous..." type="submit"
-                    hidden></input>
-                {% else %}
-                <input name="detail" id="comment-input" placeholder="commenting as {{ username }}"></input>
-                {% endif %}
+                <div class=" comment-input-wrapper">
+                    {% if not username %}
+                    <input name="detail" id="comment-input" placeholder="commenting as anonymous..."></input>
+                    {% else %}
+                    <input name="detail" id="comment-input" placeholder="commenting as {{ username }}"></input>
+                    {% endif %}
+                </div>
+                <button name="create_comment" id="comment-submit" type="submit">&#8620;</button>
                 <input name="create_comment" type="submit" hidden></input>
             </form>
 
-            {% for comment in comments %}
-            <div class="comment">
-                <div class="comment-author">
-                    {{ comment.author }}
-                </div>
-                <div class="comment-content">
-                    {{ comment.content }}
+            <div class="row gy-3 p-3" id="comment-section">
+                {% for comment in comments %}
+                <div class="col-12 comment">
+                    <div class="comment-author">
+                        {{ comment.author_id }}
+                    </div>
+                    {% if role == '0' or role == '1' or user.username != username %}
+                    <div class="comment-action">
+                        <a href="{% url 'edit_user' user.id %}">Edit</a>
+                        <a href="{% url 'delete_user' user.id %}">Delete</a>
+                    </div>
+                    {% endif %}
+                    <div class="comment-content">
+                        {{ comment.detail }}
+                    </div>
                 </div>
                 {% endfor %}
-
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
 
-    {% block js %}
-    {% endblock %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

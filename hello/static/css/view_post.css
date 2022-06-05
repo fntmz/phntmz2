@@ -15,7 +15,7 @@
 }
 
 #content-wrapper > div {
-    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 400;
     font-size: 14px;
     white-space: pre-wrap;
@@ -33,6 +33,11 @@
     position: absolute;
 }
 
+#jump-comment {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    display: none;
+}
+
 #comment-input {
     padding: 0 20px 0 20px;
     background-color: transparent !important;
@@ -45,14 +50,67 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     color: var(--color);
-    width: 100%;
     padding-bottom: 5px;
+    width: 100%;
+}
+
+#comment-wrapper > form {
+    position: relative;
+}
+
+#comment-submit {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    transition: color 0.3s;
+    color: var(--color);
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: color 0.3s;
+}
+
+#comment-submit:hover {
+    color: var(--a-highlight);
+}
+
+.comment {
+    position: relative;
+}
+
+.comment-author {
+    position: relative;
+    left: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.comment-action {
+    display: flex;
+}
+
+.comment-action > a {
+    position: absolute;
+}
+
+.comment-content {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 14px;
+    color: lightgrey;
 }
 
 h1 {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
 }
 
 h4 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
+}
+
+@media only screen and (max-width: 1200px) {
+    #jump-comment {
+        display: block;
+    }
 }

@@ -28,17 +28,16 @@ def index(request):
 
 def viewPosts(request, id):
     if request.method == "POST":
-        if "create_comment" in request.POST:
+        if "create_comment" in request.POST and len(request.POST.get("detail")) > 31:
             comments = Comments()
             comments.detail = request.POST.get("detail")
             comments.author_id = request.session.get("author_id")
             comments.post_id = id
             comments.save()
 
-        elif "edit_comment" in request.POST:
+        elif "edit_comment" in request.POST and len(request.POST.get("detail")) > 31:
             comments = Comments.objects.get(pk = id)
             comments.detail = request.POST.get("detail")
-            comments.post_id = id
             comments.save()
 
         return redirect(request.META['HTTP_REFERER'])
@@ -63,9 +62,9 @@ def login(request):
                 if password == user.password:
                     request.session['username'] = username
                     request.session['author_id'] = user.id
-                    if user.role == 0:
+                    if int(user.role) == 0:
                         request.session['role'] = '0'
-                    elif user.role == 1:
+                    elif int(user.role) == 1:
                         request.session['role'] = '1'
                     else:
                         request.session['role'] = '2'
@@ -90,6 +89,7 @@ def login(request):
 
 def user(request):
     role = request.session.get('role')
+    print(role)
 
     if role == '0' or role == '1':
         return render(request, "admin_user.html", {"user": User.objects.all(), "role": role, "username": request.session.get('username'), "darkmode": request.session.get('darkmode')})
@@ -206,7 +206,6 @@ def editPosts(request, id):
 
 
 """---comments views---"""
-
 
 def deleteComments(request, id):
     Comments.objects.get(pk = id).delete()
