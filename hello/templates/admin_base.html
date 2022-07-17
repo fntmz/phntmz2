@@ -39,6 +39,7 @@
 
         <div id="navbar-content">
             <div class="easing-right"><a href="{% url 'posts' %}">Manage Posts</a></div>
+            <div class="easing-right"><a href="{% url 'comments' %}">Manage Comments</a></div>
             {% if role != '2' %}
             <div class="easing-right">
                 <a href="{% url 'user' %}">Manage Users</a>

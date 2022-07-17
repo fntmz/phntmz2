@@ -16,9 +16,8 @@ admin.autodiscover()
 
 urlpatterns = [
     path("", hello.views.index, name="index"),
-    path("darkmode/", hello.views.darkmode, name="darkmode"),
-    path("admin/", hello.views.login, name="login"),
     path("posts/<id>", hello.views.viewPosts, name="view_posts"),
+    path("admin/", hello.views.login, name="login"),
     path("admin/user", hello.views.user, name="user"),
     path("admin/user/create", hello.views.createUser, name="create_user"),
     path("admin/user/delete/<id>", hello.views.deleteUser, name="delete_user"),
@@ -27,9 +26,10 @@ urlpatterns = [
     path("admin/posts/create", hello.views.createPosts, name="create_posts"),
     path("admin/posts/delete/<id>", hello.views.deletePosts, name="delete_posts"),
     path("admin/posts/edit/<id>", hello.views.editPosts, name="edit_posts"),
-    # path("admin/comments", hello.views.comments, name="comments"),
-    # path("admin/comments/create", hello.views.createComments, name="create_comments"),
-    # path("admin/comments/delete/<id>", hello.views.deleteComments, name="delete_comments"),
-    # path("admin/comments/edit/<id>", hello.views.editComments, name="edit_comments"),
+    path("admin/comments", hello.views.comments, name="comments"), 
+    path("admin/comments/edit/<id>", hello.views.editComments, name="edit_comments"),
+    path("admin/comments/hide/<id>", hello.views.hideComments, name="hide_comments"),
+    path("admin/comments/reveal/<id>", hello.views.revealComments, name="reveal_comments"),
+    path("admin/comments/delete/<id>", hello.views.deleteComments, name="delete_comments"),
     path("admin/logout", hello.views.logout, name="logout")
 ]

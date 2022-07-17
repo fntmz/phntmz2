@@ -1,0 +1,65 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐜𝐨𝐦𝐦𝐞𝐧𝐭𝐬{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+
+<div id="user-wrapper">
+    <div id="user-legend">
+        <div>ID</div>
+        <div>Detail</div>
+        <div>Author</div>
+        <div>Updated</div>
+        <div>Visibility</div>
+        <div>Action</div>
+    </div>
+    <div id="list-wrapper">
+        {% for comment in comments %}
+        <div class="user-row">
+            <div>{{ forloop.counter }}</div>
+            <div>{{ comment.detail }}</div>
+            <div>{{ comment.author_name }}</div>
+            <div>{{ comment.updated_at }}</div>
+
+            {% if comment.hidden == False %}
+            <div>Visible</div>
+            {% else %}
+            <div>Hidden</div>
+            {% endif %}
+
+            <div class="user-action">
+                {% if username == comment.author_username %}
+                <a href="{% url 'edit_comments' comment.id %}">Edit</a>
+                {% endif %}
+
+                <a href="{% url 'delete_comments' comment.id %}">Delete</a>
+
+                {% if comment.hidden == False %}
+                <a href="{% url 'view_posts' comment.post_id %}#comment-{{ comment.id }}">Read</a>
+                {% else %}
+
+                {% if user.role != 2 %}
+                <a href="{% url 'reveal_comments' comment.id %}">Reveal</a>
+                {% endif %}
+
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="unhide-requests">
+    <button></button>
+</div>
+
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+<a href="{% url 'create_posts' %}">create</a>
+{% endblock %}

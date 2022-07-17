@@ -88,11 +88,9 @@
 }
 
 .comment-action {
-    display: flex;
-}
-
-.comment-action > a {
-    position: absolute;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    text-align: right;
 }
 
 .comment-content {

@@ -1,0 +1,36 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐞𝐝𝐢𝐭 𝐜𝐨𝐦𝐦𝐞𝐧𝐭𝐬{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/form_user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div class="form-wrapper">
+    <form action="" method="POST" id="form_posts">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="titleInput">Title</label>
+            <input type="text" id="titleInput" name="title" autocomplete="off" maxlength="256" value="{{ posts.title }}"
+                required />
+        </div>
+        <div class="form-group">
+            <label for="descriptionInput">Description</label>
+            <input type="text" id="descriptionInput" name="description" autocomplete="off" maxlength="1024"
+                value="{{ posts.description }}" required />
+        </div>
+        <div class="form-group">
+            <label for="detailInput">Detail</label>
+            <textarea type="text" id="detailInput" name="detail" autocomplete="off" maxlength="32768" rows="25"
+                required>{{ posts.detail }}</textarea>
+        </div>
+    </form>
+</div>
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+<button type="submit" form="form_posts">
+    <span id="submit-btn">submit</span>
+</button>
+{% endblock %}

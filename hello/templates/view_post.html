@@ -40,18 +40,23 @@
                 <input name="create_comment" type="submit" hidden></input>
             </form>
 
-            <div class="row gy-3 p-3" id="comment-section">
+            <div class="row p-3" id="comment-section">
+                {% if comments|length == 0 %}
+                <div class="comment-content">no comments yet</div>
+                {% endif %}
                 {% for comment in comments %}
-                <div class="col-12 comment">
-                    <div class="comment-author">
-                        {{ comment.author_id }}
+                <div class="col-12 comment gy-4" id="comment-{{ comment.id }}">
+                    <div class="row">
+                        <div class="col-6 p-0 comment-author">
+                            {{ comment.author_name }}
+                        </div>
+                        {% if role == '0' or role == '1' or user.username != username %}
+                        <div class="col-6 comment-action">
+                            <a href="{% url 'hide_comments' comment.id %}">Hide</a>
+                            <a href="{% url 'delete_comments' comment.id %}">Delete</a>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if role == '0' or role == '1' or user.username != username %}
-                    <div class="comment-action">
-                        <a href="{% url 'edit_user' user.id %}">Edit</a>
-                        <a href="{% url 'delete_user' user.id %}">Delete</a>
-                    </div>
-                    {% endif %}
                     <div class="comment-content">
                         {{ comment.detail }}
                     </div>
