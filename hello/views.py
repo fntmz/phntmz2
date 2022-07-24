@@ -14,7 +14,7 @@ def logout(request):
 
 
 def index(request):
-    return render(request, "index.html", {"username": request.session.get('username'), "posts": Posts.objects.all()[::-1]})
+    return render(request, "index.html", {"username": request.session.get('username'), "posts": Posts.objects.all()[::-1], "most_read": Posts.objects.order_by("-views")})
 
 
 def viewPosts(request, id):
@@ -42,7 +42,11 @@ def viewPosts(request, id):
         }
         comments.append(comment)
 
-    return render(request, "view_post.html", {"comments": comments, "username": request.session.get('username'), "user": User.objects.all(), "posts": Posts.objects.get(pk=id)})
+    post = Posts.objects.get(pk = id)
+    post.views += 1
+    post.save()
+
+    return render(request, "view_post.html", {"comments": comments, "username": request.session.get('username'), "posts": post, "role": request.session.get('role')})
 
 
 def login(request):
@@ -61,7 +65,6 @@ def login(request):
                 user = User.objects.get(username = username)
                 if password == user.password:
                     request.session['username'] = username
-                    request.session['author_id'] = user.id
                     if int(user.role) == 0:
                         request.session['role'] = '0'
                     elif int(user.role) == 1:
@@ -174,8 +177,9 @@ def createPosts(request):
 def deletePosts(request, id):
     role = request.session.get('role')
     username = request.session.get('username')
-    if role == '0' or role == '1' or username == username:
-        Posts.objects.get(pk = id).delete()
+    posts = Posts.objects.get(pk = id)
+    if role == '0' or role == '1' or posts.author == username:
+        posts.delete()
         return redirect(request.META['HTTP_REFERER'])
     return redirect("/admin")
 
@@ -192,7 +196,7 @@ def editPosts(request, id):
         posts.save()
         return redirect("/admin/posts")
 
-    if role == '0' or role == '1' or username == username:
+    if role == '0' or role == '1' or username == posts.author:
         return render(request, "admin_posts_edit.html", {"posts": posts, "role": role})
     return redirect("/admin")
 
@@ -222,11 +226,22 @@ def comments(request):
     if role == '0' or role == '1':
         return render(request, "admin_comments.html", {"user": User.objects.all(), "comments": comments, "role": role, "username": request.session.get('username')})
     elif role == '2':
-        return render(request, "admin_comments.html", {"comments": comments.filter(author=request.session.get('username')), "role": role})
+        return render(request, "admin_comments.html", {"comments": comments.filter(author = request.session.get('username')), "role": role})
     return redirect("/admin")
 
 
 def editComments(request, id):
+    role = request.session.get('role')
+    username = request.session.get('username')
+    comments = Comments.objects.get(pk = id)
+    user = User.objects.get(id = comments.author_id)
+    if request.method == "POST":
+        comments.detail = request.POST.get("detail")
+        comments.save()
+        return redirect("/admin/comments")
+
+    if role == '0' or role == '1' or user.username == username:
+        return render(request, "admin_comments_edit.html", {"comments": comments, "role": role})
     return redirect(request.META['HTTP_REFERER'])
 
 

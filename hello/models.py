@@ -17,6 +17,7 @@ class Posts(models.Model):
     description = models.CharField(max_length=1024)
     detail = models.CharField(max_length=32768)
     author = models.CharField(max_length=128)
+    views = models.BigIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

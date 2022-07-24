@@ -50,12 +50,12 @@
                         <div class="col-6 p-0 comment-author">
                             {{ comment.author_name }}
                         </div>
-                        {% if role == '0' or role == '1' or user.username != username %}
                         <div class="col-6 comment-action">
+                            {% if role == '0' or role == '1' %}
                             <a href="{% url 'hide_comments' comment.id %}">Hide</a>
                             <a href="{% url 'delete_comments' comment.id %}">Delete</a>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
                     <div class="comment-content">
                         {{ comment.detail }}
