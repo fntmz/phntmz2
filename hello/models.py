@@ -30,3 +30,12 @@ class Comments(models.Model):
     hidden = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Ratings(models.Model):
+    id = models.AutoField(primary_key=True)
+    post_id = models.CharField(max_length=16)
+    author_id = models.CharField(max_length=16)
+    rating = models.BigIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

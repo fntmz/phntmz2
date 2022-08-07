@@ -1,9 +1,10 @@
+from os import execv
 import re
 from urllib.robotparser import RobotFileParser
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.db.models import Avg
 
-from .models import Posts, User, Comments
+from .models import Posts, User, Comments, Ratings
 
 # Create your views here.
 
@@ -19,8 +20,19 @@ def index(request):
 
 def viewPosts(request, id):
     comments_raw = Comments.objects.filter(hidden = False, post_id = id)[::-1]
-    if request.method == "POST":
 
+    """---render ratings---"""
+    try:
+        ratings = Ratings.objects.get(post_id = id, author_id = request.session.get("author_id"))
+    except:
+        ratings = None
+
+    try:
+        average_rating = round(list(Ratings.objects.filter(post_id = id).aggregate(Avg('rating')).values())[0], 1)
+    except:
+        average_rating = None
+
+    if request.method == "POST":
         """---create comment---"""
         if "create_comment" in request.POST and len(request.POST.get("detail")) > 31:
             comments = Comments()
@@ -29,8 +41,21 @@ def viewPosts(request, id):
             comments.post_id = id
             comments.save()
 
+        # """---ratings---"""
+        elif "ratings_form" in request.POST:
+            if not ratings:
+                ratings = Ratings()
+                ratings.post_id = id
+                ratings.author_id = request.session.get("author_id")
+                ratings.rating = request.POST.get("rating-input")
+                ratings.save()
+            else:
+                ratings.rating = request.POST.get("rating-input")
+                ratings.save()
+
         return redirect(request.META['HTTP_REFERER'])
 
+    """---process comments---"""
     comments = []
     for comment_raw in comments_raw:
         user = User.objects.get(id = comment_raw.author_id)
@@ -42,11 +67,20 @@ def viewPosts(request, id):
         }
         comments.append(comment)
 
+    """---count views---"""
     post = Posts.objects.get(pk = id)
     post.views += 1
     post.save()
 
-    return render(request, "view_post.html", {"comments": comments, "username": request.session.get('username'), "posts": post, "role": request.session.get('role')})
+    return render(request, "view_post.html", {
+        "comments": comments, 
+        "ratings": ratings,
+        "average_rating": average_rating,
+        "username": request.session.get('username'), 
+        "posts": post, 
+        "role": request.session.get('role'),
+        }
+    )
 
 
 def login(request):

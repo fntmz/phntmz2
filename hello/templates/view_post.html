@@ -17,7 +17,7 @@
 
 <div class="container" id="post-content">
     <div class="row g-5">
-        <a href="#comment-wrapper" id="jump-comment">go to comments</a>
+        <a href="#comment-wrapper" id="jump-comment">jump to bottom</a>
 
         <div class="col-xl-7 col-12" id="content-wrapper">
             <h1>{{ posts.title }}</h1>
@@ -26,10 +26,30 @@
         </div>
 
         <div class="col-xl-5 col-12" id="comment-wrapper">
+            <h1>Ratings</h1>
+            <div class="row" id="rating-section">
+                <form action="" method="POST" id="ratings-form">
+                    {% csrf_token %}
+                    {% if ratings %}
+                    <div id="current-rating" hidden>{{ ratings.rating }}</div>
+                    {% endif %}
+                    <a class="ratings">&#9733;</a>
+                    <a class="ratings">&#9733;</a>
+                    <a class="ratings">&#9733;</a>
+                    <a class="ratings">&#9733;</a>
+                    <a class="ratings">&#9733;</a>
+                    {% if average_rating %}
+                    <span id="average-rating">avg. {{ average_rating }}</span>
+                    {% endif %}
+                    <input name="rating-input" type="hidden" id="rating-input">
+                    <button name="ratings_form" type="submit" id="rating-submit" hidden></button>
+                </form>
+            </div>
+
             <h1>Comments</h1>
             <form action="" method="POST">
                 {% csrf_token %}
-                <div class=" comment-input-wrapper">
+                <div class="comment-input-wrapper">
                     {% if not username %}
                     <input name="detail" id="comment-input" placeholder="commenting as anonymous..."></input>
                     {% else %}
@@ -37,7 +57,6 @@
                     {% endif %}
                 </div>
                 <button name="create_comment" id="comment-submit" type="submit">&#8620;</button>
-                <input name="create_comment" type="submit" hidden></input>
             </form>
 
             <div class="row p-3" id="comment-section">
@@ -45,7 +64,7 @@
                 <div class="comment-content">no comments yet</div>
                 {% endif %}
                 {% for comment in comments %}
-                <div class="col-12 comment gy-4" id="comment-{{ comment.id }}">
+                <div class="comment gy-4" id="comment-{{ comment.id }}">
                     <div class="row">
                         <div class="col-6 p-0 comment-author">
                             {{ comment.author_name }}
@@ -70,4 +89,5 @@
 {% endblock %}
 
 {% block js %}
+<script src="{% static 'js/ratinginput.js' %}"></script>
 {% endblock %}
