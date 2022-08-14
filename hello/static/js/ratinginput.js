@@ -1,5 +1,8 @@
-$(".ratings").click(function () {
-    $("#rating-input").val($(this).index() - 1);
+$(".ratings").bind("click", function () {
+    var divs = $(".ratings");
+    var curIdx = divs.index($(this)) + 1;
+
+    $("#rating-input").val(curIdx);
     $("#rating-submit").click();
 });
 
