@@ -1,0 +1,16 @@
+.user-wrapper {
+    height: 100%;
+}
+
+.list-wrapper {
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    height: calc(100% - 45px);
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+#old {
+    display: none;
+}

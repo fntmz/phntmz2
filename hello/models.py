@@ -39,3 +39,13 @@ class Ratings(models.Model):
     rating = models.BigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Feedback(models.Model):
+    id = models.AutoField(primary_key=True)
+    author_id = models.CharField(max_length=16, default="anonymous")
+    mail = models.CharField(max_length=256, default="no mail")
+    detail = models.CharField(max_length=1024)
+    reviewed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

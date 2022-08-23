@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐟𝐞𝐞𝐝𝐛𝐚𝐜𝐤{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/feedback.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div class="container" id="header-menu">
+    <a href="{% url 'index' %}">Home</a>
+    <a>Media</a>
+    <a>About</a>
+    <a href="{% url 'feedback' %}">Feedback</a>
+</div>
+
+<div class="container" id="form-wrapper">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="mailInput">Email</label>
+            <input type="text" id="mailInput" name="mail" autocomplete="off" maxlength="256" required />
+        </div>
+        <div class="form-group">
+            <label for="detailInput">Detail</label>
+            <textarea type="text" id="detailInput" name="detail" autocomplete="off" maxlength="1024" rows="25"
+                required></textarea>
+        </div>
+        <button id="submit-btn" type="submit">submit</button>
+    </form>
+</div>
+{% endblock %}

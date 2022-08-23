@@ -4,7 +4,7 @@ from urllib.robotparser import RobotFileParser
 from django.shortcuts import redirect, render
 from django.db.models import Avg
 
-from .models import Posts, User, Comments, Ratings
+from .models import Feedback, Posts, User, Comments, Ratings
 
 # Create your views here.
 
@@ -37,7 +37,10 @@ def viewPosts(request, id):
         if "create_comment" in request.POST and len(request.POST.get("detail")) > 31:
             comments = Comments()
             comments.detail = request.POST.get("detail")
-            comments.author_id = request.session.get("author_id")
+            if not request.session.get("author_id"):
+                comments.author_id = 5
+            else:
+                comments.author_id = request.session.get("author_id")
             comments.post_id = id
             comments.save()
 
@@ -232,6 +235,59 @@ def editPosts(request, id):
 
     if role == '0' or role == '1' or username == posts.author:
         return render(request, "admin_posts_edit.html", {"posts": posts, "role": role})
+    return redirect("/admin")
+
+
+"""---feedback views---"""
+
+def feedback(request):
+    if request.method == "POST":
+        feedback = Feedback()
+        feedback.author_id = request.session.get('username')
+        feedback.mail = request.POST.get("mail")
+        feedback.detail = request.POST.get("detail")
+        feedback.save()
+        return redirect("/")
+    return render(request, "feedback.html")
+
+
+def feedbackAdmin(request):
+    role = request.session.get('role')
+    username = request.session.get('username')
+
+    if role == '0' or role == '1':
+        return render(request, "admin_feedback.html", {"feedbacks_new": Feedback.objects.filter(reviewed=False), "feedbacks_old": Feedback.objects.filter(reviewed=True), "role": role})
+    elif role == '2':
+        return render(request, "admin_feedback.html", {"feedbacks": Feedback.objects.filter(author=username), "role": role})
+    return redirect("/admin")
+
+
+def showFeedback(request, id):
+    role = request.session.get('role')
+    feedback = Feedback.objects.get(pk = id)
+    username = request.session.get('username')
+
+    if role == '0' or role == '1' or (role == '2' and username == feedback.author_id):
+        return render(request, "admin_feedback_view.html", {"feedback": feedback})
+    return redirect("/admin")
+
+
+def reviewFeedback(request, id):
+    role = request.session.get('role')
+    feedback = Feedback.objects.get(pk = id)
+    if role == '0' or role == '1':
+        feedback.reviewed = True
+        feedback.save()
+        return redirect("/admin/feedback")
+    return redirect("/admin")
+
+
+def deleteFeedback(request, id):
+    username = request.session.get('uesrname')
+    feedback = Feedback.objects.get(pk = id)
+    if feedback.author_id == username:
+        feedback.delete()
+        return redirect(request.META['HTTP_REFERER'])
     return redirect("/admin")
 
 

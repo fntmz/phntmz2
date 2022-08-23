@@ -48,7 +48,10 @@
 </div>
 
 {% endblock %} {% block sidebar %}
-<a id="toggle-btn" href="javascript:void(0)" onclick="toggleSection()">register</a>
-{% endblock %} {% block js %}
+<a id="toggle-btn" href="javascript:void(0)"
+    onclick="toggleSection('login', 'register', '#login-section', '#register-section')">register</a>
+{% endblock %}
+<!--  -->
+{% block js %}
 <script src="{% static 'js/admin/togglesection.js' %}"></script>
 {% endblock %}

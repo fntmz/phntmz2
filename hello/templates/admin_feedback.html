@@ -1,0 +1,85 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐟𝐞𝐞𝐝𝐛𝐚𝐜𝐤{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/feedback.css' %}" />
+<link rel="stylesheet" href="{% static 'css/admin/user.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div class="user-wrapper">
+    <div id="user-legend">
+        <div>ID</div>
+        <div>Author</div>
+        <div>Detail</div>
+        <div>Created at</div>
+        <div>Action</div>
+    </div>
+    <div class="list-wrapper" id="new">
+        {% if role != '2' %}
+        {% for feedback in feedbacks_new %}
+        <div class="user-row">
+            <div>{{ forloop.counter }}</div>
+            <div>{{ feedback.author_id }}</div>
+            <div>{{ feedback.detail }}</div>
+            <div>{{ feedback.created_at }}</div>
+            <div class="user-action">
+                <a href="{% url 'show_feedback' feedback.id %}">View</a>
+                <a href="{% url 'review_feedback' feedback.id %}">Reviewed</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        {% for feedback in feedbacks %}
+        <div class="user-row">
+            <div>{{ forloop.counter }}</div>
+            <div>{{ feedback.author_id }}</div>
+            <div>{{ feedback.detail }}</div>
+            <div>{{ feedback.created_at }}</div>
+            <div class="user-action">
+                <a href="{% url 'show_feedback' feedback.id %}">View</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% if role != '2' %}
+<div class="list-wrapper" id="old">
+    {% for feedback in feedbacks_old %}
+    <div class="user-row">
+        <div>{{ forloop.counter }}</div>
+        <div>{{ feedback.author_id }}</div>
+        <div>{{ feedback.detail }}</div>
+        <div>{{ feedback.created_at }}</div>
+        <div class="user-action">
+            <a href="{% url 'show_feedback' feedback.id %}">View</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+</div>
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+{% if role != '2' %}
+<a id="toggle-btn" href="javascript:void(0)" onclick="toggleSection('new', 'reviewed', '#new', '#old')">reviewed</a>
+{% endif %}
+{% endblock %}
+<!--  -->
+{% block js %}
+<script src="{% static 'js/admin/togglesection.js' %}"></script>
+<script>
+    function toggleFeedback(x) {
+        if x == 'new' {
+            $("#new").show();
+            $("#reviewed").remove();
+        } else {
+            $("#reviewed").show();
+            $("#new").remove();
+        }
+    }
+</script>
+{% endblock %}

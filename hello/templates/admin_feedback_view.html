@@ -1,0 +1,29 @@
+{% extends 'admin_base.html' %} {% load static %}
+<!--  -->
+{% block title %}𝐟𝐞𝐞𝐝𝐛𝐚𝐜𝐤 | {{ feedback.author_id }}&nbsp;{% endblock %}
+<!--  -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/admin/feedback_view.css' %}" />
+{% endblock %}
+<!--  -->
+{% block content %}
+<div id="feedback-view-wrapper">
+    <div id="head-wrapper">
+        <div class="head">
+            <div class="title">Username</div>
+            <div class="content">{{ feedback.author_id }}</div>
+        </div>
+        <div class="head">
+            <div class="title">Email</div>
+            <div class="content">{{ feedback.mail }}</div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="content">{{ feedback.detail }}</div>
+    </div>
+</div>
+{% endblock %}
+<!--  -->
+{% block sidebar %}
+<a href="javascript:void(0)" onclick="history.back()">back</a>
+{% endblock %}

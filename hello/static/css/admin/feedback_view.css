@@ -1,0 +1,35 @@
+section:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#head-wrapper {
+    display: flex;
+    margin-bottom: 32px;
+}
+
+.head {
+    width: 50%;
+}
+
+.title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.content {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+#feedback-view-wrapper {
+    width: 50%;
+    color: var(--color);
+}
+
+@media only screen and (max-width: 1200px) {
+    #feedback-view-wrapper {
+        width: 100%;
+    }
+}

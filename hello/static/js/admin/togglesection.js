@@ -1,15 +1,11 @@
-var toggle = false
-
-function toggleSection() {
-    if (toggle == false) {
-        toggle = true
-        $("#toggle-btn").text("login")
-        $("#register-section").fadeIn("slow");
-        $("#login-section").fadeOut("slow");
+function toggleSection(title1, title2, section1, section2) {
+    if ($("#toggle-btn").text() == title1) {
+        $("#toggle-btn").text(title2);
+        $(section1).fadeIn("slow");
+        $(section2).fadeOut("slow");
     } else {
-        toggle = false
-        $("#toggle-btn").text("register")
-        $("#register-section").fadeOut("slow");
-        $("#login-section").fadeIn("slow");
+        $("#toggle-btn").text(title1);
+        $(section1).fadeOut("slow");
+        $(section2).fadeIn("slow");
     }
 }

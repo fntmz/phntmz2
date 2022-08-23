@@ -12,7 +12,7 @@
     <a href="{% url 'index' %}">Home</a>
     <a>Media</a>
     <a>About</a>
-    <a>Copyright</a>
+    <a href="{% url 'feedback' %}">Feedback</a>
 </div>
 
 <div class="container" id="post-content">
@@ -26,6 +26,7 @@
         </div>
 
         <div class="col-xl-5 col-12" id="comment-wrapper">
+            {% if username %}
             <h1>Ratings</h1>
             <div class="row mb-2" id="rating-section">
                 <form action="" method="POST" id="ratings-form">
@@ -45,6 +46,7 @@
                     <button name="ratings_form" type="submit" id="rating-submit" hidden></button>
                 </form>
             </div>
+            {% endif %}
 
             <h1>Comments</h1>
             <form action="" method="POST">
